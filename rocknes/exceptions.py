@@ -1,0 +1,2 @@
+class InvalidRom(Exception):
+    pass
