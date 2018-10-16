@@ -16,6 +16,7 @@ class Cpu():
         self.opcode_functions = {
             0x4c: (self.decoder.decode_jmp, self.executor.execute_jmp),
             0x6c: (self.decoder.decode_jmp, self.executor.execute_jmp),
+            0xea: (self.decoder.decode_nop, self.executor.execute_nop),
         }
 
     def decode_execute(self):

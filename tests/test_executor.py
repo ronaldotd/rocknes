@@ -17,3 +17,11 @@ def test_execute_jmp_indirect(mock_memory_read, cpu):
     assert mock_memory_read.call_count == 3
     assert cpu.reg_pc == 0xdead
     assert exe_cycles == 5
+
+
+def test_execute_nop(cpu):
+    cpu.reg_pc = 0x1000
+    exe_cycles = cpu.executor.execute_nop()
+
+    assert cpu.reg_pc == 0x1001
+    assert exe_cycles == 2

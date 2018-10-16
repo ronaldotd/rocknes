@@ -15,3 +15,7 @@ class InstructionExecutor():
 
         self.cpu.reg_pc = address
         return exe_cycles
+
+    def execute_nop(self):
+        self.cpu.reg_pc += 1
+        return 2

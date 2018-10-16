@@ -10,3 +10,6 @@ class InstructionDecoder():
         msb = self.cpu.memory_read(self.cpu.reg_pc + 2)
         address = address_from_little_endian(lsb, msb)
         return (3, address)
+
+    def decode_nop(self):
+        return (1,)

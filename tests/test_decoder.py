@@ -8,3 +8,9 @@ def test_decode_jmp(mock_memory_read, cpu):
     assert mock_memory_read.call_count == 2
     assert length == 3
     assert address == 0xdead
+
+
+def test_decode_nop(cpu):
+    (length,) = cpu.decoder.decode_nop()
+
+    assert length == 1
