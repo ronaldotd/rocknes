@@ -18,8 +18,7 @@ class Cpu():
 
     def decode_execute(self):
         opcode = self.memory_read(self.reg_pc)
-        decode_execute_fns = self.opcode_functions[opcode]
-        decode_fn, execute_fn = decode_execute_fns
+        decode_fn, execute_fn = self.opcode_functions[opcode]
 
         instruction_length, exe_cycles, *params = decode_fn()
         execute_fn(*params)
