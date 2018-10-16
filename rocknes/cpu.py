@@ -1,5 +1,5 @@
-from .exceptions import MemorySpaceExceeded
-from .utils import address_from_little_endian
+from .decoder import InstructionDecoder
+from .executor import InstructionExecutor
 
 
 class Cpu():
@@ -14,16 +14,16 @@ class Cpu():
         self.executor = InstructionExecutor(self)
 
         self.opcode_functions = {
-            0x4c: (self.decoder.decode_jmp_absolute, self.executor.execute_instruction_jmp),
-            0x6c: (self.decoder.decode_jmp_indirect, self.executor.execute_instruction_jmp),
+            0x4c: (self.decoder.decode_jmp, self.executor.execute_jmp),
+            0x6c: (self.decoder.decode_jmp, self.executor.execute_jmp),
         }
 
     def decode_execute(self):
         opcode = self.memory_read(self.reg_pc)
         decode_fn, execute_fn = self.opcode_functions[opcode]
 
-        instruction_length, exe_cycles, *params = decode_fn()
-        execute_fn(*params)
+        instruction_length, *params = decode_fn()
+        exe_cycles = execute_fn(*params)
 
         return instruction_length, exe_cycles
 
@@ -32,35 +32,3 @@ class Cpu():
 
     def memory_write(self, address):
         pass
-
-
-class InstructionDecoder():
-    def __init__(self, cpu):
-        self.cpu = cpu
-
-    def decode_jmp_absolute(self):
-        lsb = self.cpu.memory_read(self.cpu.reg_pc + 1)
-        msb = self.cpu.memory_read(self.cpu.reg_pc + 2)
-        address = address_from_little_endian(lsb, msb)
-        return (3, 3, address)
-
-    def decode_jmp_indirect(self):
-        lsb = self.cpu.memory_read(self.cpu.reg_pc + 1)
-        msb = self.cpu.memory_read(self.cpu.reg_pc + 2)
-        address = address_from_little_endian(lsb, msb)
-
-        lsb = self.cpu.memory_read(address)
-        msb = self.cpu.memory_read(address + 1)
-        address = address_from_little_endian(lsb, msb)
-
-        return (3, 5, address)
-
-
-class InstructionExecutor():
-    def __init__(self, cpu):
-        self.cpu = cpu
-
-    def execute_instruction_jmp(self, address):
-        if address > 0xffff:
-            raise MemorySpaceExceeded()
-        self.cpu.reg_pc = address
