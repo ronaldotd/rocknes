@@ -10,10 +10,12 @@ class Cpu():
         self.reg_a = 0
         self.reg_x = 0
         self.reg_y = 0
+        self.decoder = InstructionDecoder(self)
+        self.executor = InstructionExecutor(self)
 
         self.opcode_functions = {
-            0x4c: (self.decode_jmp_absolute, self.execute_instruction_jmp),
-            0x6c: (self.decode_jmp_indirect, self.execute_instruction_jmp),
+            0x4c: (self.decoder.decode_jmp_absolute, self.executor.execute_instruction_jmp),
+            0x6c: (self.decoder.decode_jmp_indirect, self.executor.execute_instruction_jmp),
         }
 
     def decode_execute(self):
@@ -31,24 +33,34 @@ class Cpu():
     def memory_write(self, address):
         pass
 
+
+class InstructionDecoder():
+    def __init__(self, cpu):
+        self.cpu = cpu
+
     def decode_jmp_absolute(self):
-        lsb = self.memory_read(self.reg_pc + 1)
-        msb = self.memory_read(self.reg_pc + 2)
+        lsb = self.cpu.memory_read(self.cpu.reg_pc + 1)
+        msb = self.cpu.memory_read(self.cpu.reg_pc + 2)
         address = address_from_little_endian(lsb, msb)
         return (3, 3, address)
 
     def decode_jmp_indirect(self):
-        lsb = self.memory_read(self.reg_pc + 1)
-        msb = self.memory_read(self.reg_pc + 2)
+        lsb = self.cpu.memory_read(self.cpu.reg_pc + 1)
+        msb = self.cpu.memory_read(self.cpu.reg_pc + 2)
         address = address_from_little_endian(lsb, msb)
 
-        lsb = self.memory_read(address)
-        msb = self.memory_read(address + 1)
+        lsb = self.cpu.memory_read(address)
+        msb = self.cpu.memory_read(address + 1)
         address = address_from_little_endian(lsb, msb)
 
         return (3, 5, address)
 
+
+class InstructionExecutor():
+    def __init__(self, cpu):
+        self.cpu = cpu
+
     def execute_instruction_jmp(self, address):
         if address > 0xffff:
             raise MemorySpaceExceeded()
-        self.reg_pc = address
+        self.cpu.reg_pc = address
