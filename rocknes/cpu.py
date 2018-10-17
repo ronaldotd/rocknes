@@ -10,6 +10,8 @@ class Cpu():
         self.reg_a = 0
         self.reg_x = 0
         self.reg_y = 0
+        self.flag_z = 0
+        self.flag_n = 0
         self.decoder = InstructionDecoder(self)
         self.executor = InstructionExecutor(self)
 
