@@ -1,6 +1,16 @@
 from unittest import mock
 
 
+def test_execute_and_immediate(cpu):
+    cpu.reg_a = 0x00
+    exe_cycles = cpu.executor.execute_and_immediate(0x55)
+
+    assert exe_cycles == 2
+    assert cpu.reg_a == 0x00
+    assert cpu.flag_n == 0
+    assert cpu.flag_z == 1
+
+
 @mock.patch('rocknes.cpu.Cpu.memory_read', side_effect=[0x4c])
 def test_execute_jmp_absolute(mock_memory_read, cpu):
     exe_cycles = cpu.executor.execute_jmp(0x1000)
