@@ -16,6 +16,10 @@ class InstructionExecutor():
 
         return 2
 
+    def execute_and_zero_page(self, operand_address):
+        operand = self.cpu.memory_read(operand_address)
+        return self.execute_and_immediate(operand) + 1
+
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
         return 3

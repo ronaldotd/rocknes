@@ -16,6 +16,7 @@ class Cpu():
         self.executor = InstructionExecutor(self)
 
         self.opcode_functions = {
+            0x25: (self.decoder.decode_and_zero_page, self.executor.execute_and_zero_page),
             0x29: (self.decoder.decode_and_immediate, self.executor.execute_and_immediate),
             0x4c: (self.decoder.decode_jmp, self.executor.execute_jmp_absolute),
             0x6c: (self.decoder.decode_jmp, self.executor.execute_jmp_indirect),
