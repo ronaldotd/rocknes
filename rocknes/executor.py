@@ -27,5 +27,4 @@ class InstructionExecutor():
         return self.execute_jmp_absolute(address) + 2
 
     def execute_nop(self):
-        self.cpu.reg_pc += 1
         return 2
