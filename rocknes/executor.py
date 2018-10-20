@@ -9,10 +9,10 @@ class InstructionExecutor():
         self.cpu.reg_a &= operand
 
         if self.cpu.reg_a == 0:
-            self.cpu.flag_z = 1
+            self.cpu.status_z = True
 
         if self.cpu.reg_a & 0x80:
-            self.cpu.flag_n = 1
+            self.cpu.status_n = True
 
         return 2
 
