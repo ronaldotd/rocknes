@@ -46,6 +46,21 @@ def test_execute_and_zero_page(mock_memory_read, cpu):
     assert mock_memory_read.call_count == 3
 
 
+@mock.patch('rocknes.cpu.Cpu.memory_read', side_effect=[0x35, 0xfe, 0x55])
+def test_execute_and_zero_page_x(mock_memory_read, cpu):
+    cpu.reg_a = 0xaa
+    cpu.reg_x = 0x10
+    length, cycles = cpu.decode_execute()
+
+    assert cpu.reg_a == 0x00
+    assert cpu.status_z is True
+    assert cpu.status_n is False
+    assert length == 2
+    assert cycles == 4
+    assert mock_memory_read.call_count == 3
+    mock_memory_read.assert_any_call(0x0e)
+
+
 @mock.patch('rocknes.cpu.Cpu.memory_read', side_effect=[0x4c, 0xad, 0xde])
 def test_execute_jmp_absolute(mock_memory_read, cpu):
     length, cycles = cpu.decode_execute()
