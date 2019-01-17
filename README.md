@@ -7,6 +7,20 @@ I have always admired CPU emulation, and the best way to understand how it works
 ## Table of Contents
 
 * **[6502 CPU](#6502-cpu)**
+  * [Addressing modes](#addressing-modes)
+    * [Implicit](#addressing-implicit)
+    * [Accumulator](#addressing-accumulator)
+    * [Immediate](#addressing-imediate)
+    * [Zero Page](#addressing-zero-page)
+    * [Zero Page,X](#addressing-zero-page-x)
+    * [Zero Page,Y](#addressing-zero-page-y)
+    * [Relative](#addressing-relative)
+    * [Absolute](#addressing-absolute)
+    * [Absolute,X](#addressing-absolute-x)
+    * [Absolute,Y](#addressing-absolute-y)
+    * [Indirect](#addressing-indirect)
+    * [Indexed Indirect](#addressing-indexed-indirect)
+    * [Indirect Indexed](#addressing-indirect-indexed)
   * [Instruction Set](#instruction-set)
     * [ADC](#adc)
     * [AND](#and)
