@@ -16,12 +16,12 @@ class Cpu():
         self.executor = InstructionExecutor(self)
 
         self.opcode_functions = {
-            0x25: (self.decoder.decode_and_zero_page, self.executor.execute_and_zero_page),
-            0x29: (self.decoder.decode_and_immediate, self.executor.execute_and_immediate),
-            0x35: (self.decoder.decode_and_zero_page, self.executor.execute_and_zero_page_x),
-            0x4c: (self.decoder.decode_jmp, self.executor.execute_jmp_absolute),
-            0x6c: (self.decoder.decode_jmp, self.executor.execute_jmp_indirect),
-            0xea: (self.decoder.decode_nop, self.executor.execute_nop),
+            0x25: (self.decoder.decode_byte, self.executor.execute_and_zero_page),
+            0x29: (self.decoder.decode_byte, self.executor.execute_and_immediate),
+            0x35: (self.decoder.decode_byte, self.executor.execute_and_zero_page_x),
+            0x4c: (self.decoder.decode_word, self.executor.execute_jmp_absolute),
+            0x6c: (self.decoder.decode_word, self.executor.execute_jmp_indirect),
+            0xea: (self.decoder.decode_implicit, self.executor.execute_nop),
         }
 
     def decode_execute(self):
