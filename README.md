@@ -78,11 +78,16 @@ I have always admired CPU emulation, and the best way to understand how it works
     * [TXA](#txa)
     * [TXS](#txs)
     * [TYA](#tya)
-    
-
+* **[References](#references)**    
 ----
 
 ## 6502 CPU
+
+### Addressing Modes
+
+#### Relative
+
+Signed offset is added to the program counter. Offsets range from -128 to 127.
 
 ### Instruction Set
 
@@ -97,6 +102,10 @@ Arithmetic shift left.
 
 #### BCC
 Branch if carry clear.
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | 90     | 2     | 2 (3 if branch taken, 4 if page boundary crossed      |
 
 #### BCS
 Branch if carry set.
@@ -253,3 +262,8 @@ Transfer X to stack pointer.
 
 #### TYA
 Transfer Y to accumulator.
+
+## References
+http://www.obelisk.me.uk/6502/reference.html
+https://www.masswerk.at/6502/6502_instruction_set.html
+https://en.wikibooks.org/wiki/6502_Assembly
