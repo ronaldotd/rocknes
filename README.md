@@ -14,7 +14,7 @@ I have always admired CPU emulation, and the best way to understand how it works
     * [Zero Page](#addressing-zero-page)
     * [Zero Page,X](#addressing-zero-page-x)
     * [Zero Page,Y](#addressing-zero-page-y)
-    * [Relative](#addressing-relative)
+    * [Relative](#relative)
     * [Absolute](#addressing-absolute)
     * [Absolute,X](#addressing-absolute-x)
     * [Absolute,Y](#addressing-absolute-y)
