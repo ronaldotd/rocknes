@@ -87,7 +87,9 @@ I have always admired CPU emulation, and the best way to understand how it works
 
 #### Relative
 
+Used in relative branch instructions.
 Signed offset is added to the program counter. Offsets range from -128 to 127.
+The offset is relative to the first byte of the next instruction. For example, 90 00 is a BCC with no effect.
 
 ### Instruction Set
 
