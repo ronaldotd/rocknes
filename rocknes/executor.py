@@ -1,4 +1,4 @@
-from .utils import address_from_little_endian
+from .utils import address_from_little_endian, addresses_on_same_page
 
 
 class InstructionExecutor():
@@ -24,6 +24,21 @@ class InstructionExecutor():
         operand_address = (operand_address + self.cpu.reg_x) & 0xff
         operand = self.cpu.memory_read(operand_address)
         return self.execute_and_immediate(operand) + 2
+
+    def execute_bcc(self, offset):
+        cycles = 2
+        self.cpu.reg_pc += 2
+
+        if not self.cpu.status_c:
+            cycles += 1
+            old_pc = self.cpu.reg_pc
+            if offset > 127:
+                offset = -(256 - offset)
+            self.cpu.reg_pc += offset
+            if not addresses_on_same_page(old_pc, self.cpu.reg_pc):
+                cycles += 1
+
+        return cycles
 
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
