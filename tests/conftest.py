@@ -1,8 +1,10 @@
-import pytest
+from unittest.mock import Mock
 
-from rocknes.cpu import Cpu
+import pytest
 
 
 @pytest.fixture
 def cpu():
-    return Cpu()
+    cpu = Mock()
+    cpu.reg_pc = 0
+    return cpu

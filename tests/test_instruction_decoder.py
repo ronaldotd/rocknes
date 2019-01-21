@@ -1,15 +1,6 @@
 from unittest.mock import Mock
 
-import pytest
-
 from rocknes.decoder import InstructionDecoder
-
-
-@pytest.fixture
-def cpu():
-    cpu = Mock()
-    cpu.reg_pc = 0
-    return cpu
 
 
 def test_decode_implicit(cpu):
