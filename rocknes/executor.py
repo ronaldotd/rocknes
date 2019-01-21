@@ -26,19 +26,10 @@ class InstructionExecutor():
         return self.execute_and_immediate(operand) + 2
 
     def execute_bcc(self, offset):
-        cycles = 2
-        self.cpu.reg_pc += 2
+        return self._execute_branch(offset, not self.cpu.status_c)
 
-        if not self.cpu.status_c:
-            cycles += 1
-            old_pc = self.cpu.reg_pc
-            if offset > 127:
-                offset = -(256 - offset)
-            self.cpu.reg_pc += offset
-            if not addresses_on_same_page(old_pc, self.cpu.reg_pc):
-                cycles += 1
-
-        return cycles
+    def execute_bcs(self, offset):
+        return self._execute_branch(offset, self.cpu.status_c)
 
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
@@ -52,3 +43,18 @@ class InstructionExecutor():
 
     def execute_nop(self):
         return 2
+
+    def _execute_branch(self, offset, take_branch):
+        cycles = 2
+        self.cpu.reg_pc += 2
+
+        if take_branch:
+            cycles += 1
+            old_pc = self.cpu.reg_pc
+            if offset > 127:
+                offset = -(256 - offset)
+            self.cpu.reg_pc += offset
+            if not addresses_on_same_page(old_pc, self.cpu.reg_pc):
+                cycles += 1
+
+        return cycles
