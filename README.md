@@ -107,10 +107,14 @@ Branch if carry clear.
 
 | Addressing mode | Opcode | Bytes | Cycles |
 |-----------------|:------:|:-----:|:------:|
-| Relative        | 90     | 2     | 2 (3 if branch taken, 4 if page boundary crossed      |
+| Relative        | 90     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BCS
 Branch if carry set.
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | B0     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BEQ
 Branch if equal.
