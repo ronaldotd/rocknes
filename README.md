@@ -130,7 +130,11 @@ Bit test.
 Branch if minus.
 
 #### BNE
-Branch if not equal.
+Branch if not equal (when zero flag is not set).
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | D0     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BPL
 Branch if positive.

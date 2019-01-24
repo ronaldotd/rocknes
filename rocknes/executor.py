@@ -34,6 +34,9 @@ class InstructionExecutor():
     def execute_beq(self, offset):
         return self._execute_branch(offset, self.cpu.status_z)
 
+    def execute_bne(self, offset):
+        return self._execute_branch(offset, not self.cpu.status_z)
+
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
         return 3
