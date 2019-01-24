@@ -127,7 +127,11 @@ Branch if equal (when zero flag is set).
 Bit test.
 
 #### BMI
-Branch if minus.
+Branch if minus (when negative flag is set).
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | 30     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BNE
 Branch if not equal (when zero flag is not set).

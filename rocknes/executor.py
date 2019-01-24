@@ -34,6 +34,9 @@ class InstructionExecutor():
     def execute_beq(self, offset):
         return self._execute_branch(offset, self.cpu.status_z)
 
+    def execute_bmi(self, offset):
+        return self._execute_branch(offset, self.cpu.status_n)
+
     def execute_bne(self, offset):
         return self._execute_branch(offset, not self.cpu.status_z)
 
