@@ -117,7 +117,11 @@ Branch if carry set.
 | Relative        | B0     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BEQ
-Branch if equal.
+Branch if equal (when zero flag is set).
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | F0     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BIT
 Bit test.
