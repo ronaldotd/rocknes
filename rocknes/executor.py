@@ -40,6 +40,9 @@ class InstructionExecutor():
     def execute_bne(self, offset):
         return self._execute_branch(offset, not self.cpu.status_z)
 
+    def execute_bpl(self, offset):
+        return self._execute_branch(offset, not self.cpu.status_n)
+
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
         return 3
