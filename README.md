@@ -154,7 +154,11 @@ Branch if positive (when negative flag is not set).
 Force interrupt.
 
 #### BVC
-Branch if overflow clear.
+Branch if overflow clear (when overflow flag is not set).
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | 50     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BVS
 Branch if overflow set.

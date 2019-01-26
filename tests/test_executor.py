@@ -395,3 +395,69 @@ def test_execute_bpl_branch_taken_negative_offset_page_boundary(cpu):
 
     assert cycles == 4
     assert cpu.reg_pc == 0xabd7
+
+
+def test_execute_bvc_branch_not_taken(cpu):
+    cpu.status_v = True
+    cpu.reg_pc = 0xc0
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0xa)
+
+    assert cycles == 2
+    assert cpu.reg_pc == 0xc2
+
+
+def test_execute_bvc_branch_taken_positive_offset(cpu):
+    cpu.status_v = False
+    cpu.reg_pc = 0x20
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0xa)
+
+    assert cycles == 3
+    assert cpu.reg_pc == 0x2c
+
+
+def test_execute_bvc_branch_taken_negative_offset(cpu):
+    cpu.status_v = False
+    cpu.reg_pc = 0x70
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0xfb)
+
+    assert cycles == 3
+    assert cpu.reg_pc == 0x6d
+
+
+def test_execute_bvc_branch_taken_zero_offset(cpu):
+    cpu.status_v = False
+    cpu.reg_pc = 0x10
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0)
+
+    assert cycles == 3
+    assert cpu.reg_pc == 0x12
+
+
+def test_execute_bvc_branch_taken_positive_offset_page_boundary(cpu):
+    cpu.status_v = False
+    cpu.reg_pc = 0xdd
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0x7f)
+
+    assert cycles == 4
+    assert cpu.reg_pc == 0x15e
+
+
+def test_execute_bvc_branch_taken_negative_offset_page_boundary(cpu):
+    cpu.status_v = False
+    cpu.reg_pc = 0xac55
+    executor = InstructionExecutor(cpu)
+
+    cycles = executor.execute_bvc(0x80)
+
+    assert cycles == 4
+    assert cpu.reg_pc == 0xabd7
