@@ -1,6 +1,9 @@
 # rocknes
+
 rocknes is a NES emulator, written from scratch in Python.
 I have always admired CPU emulation, and the best way to understand how it works is to build one.
+
+[![Build Status](https://travis-ci.com/ronaldotd/rocknes.svg?branch=master)](https://travis-ci.com/ronaldotd/rocknes)
 
 ----
 
