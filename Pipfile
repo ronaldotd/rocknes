@@ -8,6 +8,7 @@ name = "pypi"
 [dev-packages]
 "flake8" = "*"
 pytest = "*"
+pytest-randomly = "*"
 
 [requires]
 python_version = "3.7.1"
