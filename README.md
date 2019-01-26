@@ -161,7 +161,11 @@ Branch if overflow clear (when overflow flag is not set).
 | Relative        | 50     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### BVS
-Branch if overflow set.
+Branch if overflow set (when overflow flag is set).
+
+| Addressing mode | Opcode | Bytes | Cycles |
+|-----------------|:------:|:-----:|:------:|
+| Relative        | 70     | 2     | 2 (3 if branch taken, 4 if page boundary crossed) |
 
 #### CLC
 Clear carry flag.

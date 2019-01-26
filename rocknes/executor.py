@@ -46,6 +46,9 @@ class InstructionExecutor():
     def execute_bvc(self, offset):
         return self._execute_branch(offset, not self.cpu.status_v)
 
+    def execute_bvs(self, offset):
+        return self._execute_branch(offset, self.cpu.status_v)
+
     def execute_jmp_absolute(self, address):
         self.cpu.reg_pc = address
         return 3
