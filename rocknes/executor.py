@@ -10,7 +10,6 @@ class InstructionExecutor():
         self.cpu.reg_pc += 2
         return 2
 
-
     def execute_and_immediate(self, operand):
         self.cpu.reg_a &= operand
 
