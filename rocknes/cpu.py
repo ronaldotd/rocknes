@@ -12,6 +12,8 @@ class Cpu():
         self.reg_y = 0
         self.status_z = False
         self.status_n = False
+        self.status_c = False
+        self.status_v = False
         self.decoder = InstructionDecoder(self)
         self.executor = InstructionExecutor(self)
 

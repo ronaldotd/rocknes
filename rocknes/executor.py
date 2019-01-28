@@ -5,6 +5,12 @@ class InstructionExecutor():
     def __init__(self, cpu):
         self.cpu = cpu
 
+    def execute_adc_immediate(self, operand):
+        self._execute_adc(operand)
+        self.cpu.reg_pc += 2
+        return 2
+
+
     def execute_and_immediate(self, operand):
         self.cpu.reg_a &= operand
 
@@ -61,6 +67,18 @@ class InstructionExecutor():
 
     def execute_nop(self):
         return 2
+
+    def _execute_adc(self, operand):
+        result = self.cpu.reg_a + operand
+
+        self.cpu.status_c = True if result & 0x100 else False
+        self.cpu.status_n = True if result & 0x80 else False
+        self.cpu.status_z = result & 0xff == 0
+        # overflow is set when the sign of both inputs is different from the sign of the result
+        # http://www.righto.com/2012/12/the-6502-overflow-flag-explained.html
+        self.cpu.status_v = bool((self.cpu.reg_a ^ result & 0xff) & (operand ^ result & 0xff) & 0x80)
+
+        self.cpu.reg_a = result & 0xff
 
     def _execute_branch(self, offset, take_branch):
         cycles = 2
